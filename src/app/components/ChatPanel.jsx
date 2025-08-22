@@ -192,7 +192,7 @@ export function ChatPanel() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center h-full text-center"
           >
-            <div className="bg-gradient-primary p-8 rounded-3xl mb-6 relative overflow-hidden">
+            <div className="bg-[var(--gradient-primary)] p-8 rounded-3xl mb-6 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
               <div className="relative flex items-center justify-center">
                 <div className="bg-white/20 p-4 rounded-2xl backdrop-blur-sm">
@@ -266,7 +266,7 @@ export function ChatPanel() {
           <Button
             onClick={sendMessage}
             disabled={!inputValue.trim() || isTyping}
-            className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            className="bg-[var(--gradient-primary)] text-primary-foreground hover:opacity-90 transition-opacity"
           >
             <Send className="w-4 h-4" />
           </Button>
@@ -285,7 +285,7 @@ function MessageBubble({ message }) {
   return (
     <div className={`flex items-start space-x-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
-        <Avatar className="w-8 h-8 bg-gradient-primary">
+        <Avatar className="w-8 h-8 bg-[var(--gradient-primary)]">
           <AvatarFallback className="bg-transparent text-primary-foreground">
             <Bot className="w-4 h-4" />
           </AvatarFallback>
@@ -320,7 +320,7 @@ function MessageBubble({ message }) {
 function TypingIndicator() {
   return (
     <div className="flex items-start space-x-3">
-      <Avatar className="w-8 h-8 bg-gradient-primary">
+      <Avatar className="w-8 h-8 bg-[var(--gradient-primary)]">
         <AvatarFallback className="bg-transparent text-primary-foreground">
           <Bot className="w-4 h-4" />
         </AvatarFallback>

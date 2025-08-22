@@ -29,7 +29,7 @@ export function Navbar() {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="bg-gradient-primary p-2 rounded-lg">
+          <div className="bg-[var(--gradient-primary)] p-2 rounded-lg">
             <BookOpen className="w-5 h-5 text-primary-foreground" />
           </div>
           <h1 className="text-xl font-bold text-foreground">Research Assistant</h1>

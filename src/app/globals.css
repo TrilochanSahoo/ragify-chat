@@ -1,23 +1,178 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+    --background: hsl(260 20% 98%);
+    --foreground: hsl(245 15% 15%);
+
+    --card: 260 30% 97% / 0.7;
+    --card-foreground: 245 15% 20%;
+
+    --popover: 260 35% 95% / 0.8;
+    --popover-foreground: 245 15% 15%;
+
+    --primary: 260 60% 55%;
+    --primary-foreground: 260 20% 97%;
+
+    --secondary: 160 40% 90% / 0.6;
+    --secondary-foreground: 245 15% 20%;
+
+    --muted: 260 20% 92% / 0.5;
+    --muted-foreground: 245 10% 45%;
+
+    --accent: 340 50% 85% / 0.7;
+    --accent-foreground: 245 15% 20%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 260 20% 97%;
+
+    --border: 260 15% 85% / 0.3;
+    --input: 260 15% 95% / 0.6;
+    --ring: 260 60% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(260 60% 55% / 0.9) 0%, hsl(280 55% 60% / 0.9) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(160 40% 85% / 0.8) 0%, hsl(180 35% 80% / 0.8) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(340 50% 80% / 0.8) 0%, hsl(320 45% 75% / 0.8) 100%);
+    --gradient-background: linear-gradient(135deg, hsl(260 20% 98%) 0%, hsl(250 25% 96%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(260 30% 97% / 0.7) 0%, hsl(250 25% 95% / 0.7) 100%);
+
+    --sources-background: 260 25% 98% / 0.7;
+    --sources-item: 260 20% 95% / 0.5;
+    --sources-item-hover: 260 25% 90% / 0.7;
+
+    --chat-background: 260 20% 98% / 0.6;
+    --chat-message-user: 260 60% 55%;
+    --chat-message-assistant: 260 25% 95% / 0.6;
+
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --glass-border: rgba(255, 255, 255, 0.18);
+  }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* --gradient-primary : var(--gradient-primary);
+  --gradient-secondary : var(--gradient-secondary);
+  --gradient-accent : var(--gradient-accent);
+  --gradient-background : var(--gradient-background);
+  --gradient-card : var(--gradient-card); */
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Sidebar, chat, sources */
+  --color-sidebar-background: var(--sidebar-background);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-chat-background: var(--chat-background);
+  --color-chat-message-user: var(--chat-message-user);
+  --color-chat-message-assistant: var(--chat-message-assistant);
+
+  --color-sources-background: var(--sources-background);
+  --color-sources-item: var(--sources-item);
+  --color-sources-item-hover: var(--sources-item-hover);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.dark {
+    /* Base colors - Soft pastels */
+    --background: hsl(240 12% 8%);
+    --foreground: hsl(260 15% 85%);
+
+    --card: 245 15% 12%;
+    --card-foreground: 260 15% 90%;
+
+    --popover: 245 20% 15%;
+    --popover-foreground: 260 15% 85%;
+
+    /* Primary - Soft lavender */
+    --primary: 260 60% 65%;
+    --primary-foreground: 245 15% 12%;
+
+    /* Secondary - Soft mint */
+    --secondary: 160 50% 70%;
+    --secondary-foreground: 245 15% 12%;
+
+    /* Muted - Subtle grays with warmth */
+    --muted: 245 15% 18%;
+    --muted-foreground: 260 10% 60%;
+
+    /* Accent - Soft rose */
+    --accent: 340 60% 75%;
+    --accent-foreground: 245 15% 12%;
+
+    --destructive: 0 70% 65%;
+    --destructive-foreground: 260 15% 85%;
+
+    --border: 245 15% 20%;
+    --input: 245 15% 16%;
+    --ring: 260 60% 65%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(260 60% 65%) 0%, hsl(280 55% 70%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(160 50% 70%) 0%, hsl(180 45% 75%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(340 60% 75%) 0%, hsl(320 55% 70%) 100%);
+    --gradient-background: linear-gradient(135deg, hsl(245 15% 8%) 0%, hsl(250 18% 12%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(245 15% 12%) 0%, hsl(250 18% 16%) 100%);
+
+    /* Sidebar */
+    --sidebar-background: 245 18% 10%;
+    --sidebar-foreground: 260 15% 80%;
+    --sidebar-primary: 260 60% 65%;
+    --sidebar-primary-foreground: 245 15% 12%;
+    --sidebar-accent: 245 15% 16%;
+    --sidebar-accent-foreground: 260 15% 85%;
+    --sidebar-border: 245 15% 18%;
+    --sidebar-ring: 260 60% 65%;
+
+    /* Chat */
+    --chat-background: 245 15% 10%;
+    --chat-message-user: 260 60% 65%;
+    --chat-message-assistant: 245 15% 16%;
+
+    /* Sources */
+    --sources-background: 245 18% 9%;
+    --sources-item: 245 15% 14%;
+    --sources-item-hover: 245 15% 18%;
   }
-}
+
+  
+
+
+
+
+
 
 body {
   background: var(--background);
