@@ -60,7 +60,7 @@ export function ResponsiveLayout() {
                     className={`
                       w-full justify-start 
                       ${activePanel === panel.id 
-                        ? 'bg-[var(--gradient-primary)] text-primary-foreground' 
+                        ? 'bg-gradient-primary text-primary-foreground' 
                         : 'text-foreground hover:bg-muted'
                       }
                     `}

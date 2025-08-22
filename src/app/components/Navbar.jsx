@@ -7,12 +7,14 @@ import { Sun, Moon, BookOpen } from "lucide-react";
 export function Navbar() {
   const [isDark, setIsDark] = useState(true);
 
+
   useEffect(() => {
-    // Check if user has a theme preference stored
-    const theme = localStorage.getItem('theme') || 'dark';
-    setIsDark(theme === 'dark');
-    document.documentElement.classList.toggle('light', theme === 'light');
-  }, []);
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   const toggleTheme = () => {
     const newTheme = isDark ? 'light' : 'dark';
@@ -29,10 +31,10 @@ export function Navbar() {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="bg-[var(--gradient-primary)] p-2 rounded-lg">
+          <div className="bg-gradient-primary p-2 rounded-lg">
             <BookOpen className="w-5 h-5 text-primary-foreground" />
           </div>
-          <h1 className="text-xl font-bold text-foreground">Research Assistant</h1>
+          <h1 className="text-xl font-bold text-foreground">Ragify Chat AI</h1>
         </div>
 
         <Button

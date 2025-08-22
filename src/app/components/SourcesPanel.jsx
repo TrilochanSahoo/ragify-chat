@@ -89,7 +89,7 @@ export function SourcesPanel({ isCollapsed = false, onToggleCollapse }) {
           <div className="mt-4">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="sm" className="bg-[var(--gradient-primary)] text-primary-foreground border-0 hover:opacity-90 w-full">
+                <Button size="sm" className="bg-gradient-primary text-primary-foreground border-0 hover:opacity-90 w-full">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Source
                 </Button>
@@ -272,7 +272,7 @@ function SourceItem({ source, onRemove }) {
 
   const getGradient = () => {
     switch (source.type) {
-      case 'file': return 'bg-[var(--gradient-primary)]';
+      case 'file': return 'bg-gradient-primary';
       case 'text': return 'bg-gradient-secondary';
       case 'url': return 'bg-gradient-accent';
     }
