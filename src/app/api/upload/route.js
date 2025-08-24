@@ -7,6 +7,7 @@ import { QdrantVectorStore } from '@langchain/qdrant';
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import 'dotenv/config'
 
 
 export async function POST(request){
@@ -22,36 +23,44 @@ export async function POST(request){
             );
         }
 
+         // Convert to Buffer
         const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
+    const buffer = Buffer.from(bytes);
 
-        const tempFilePath = path.join("/tmp", file.name);
-        await fs.writeFile(tempFilePath, buffer);
+    // Create uploads dir
+    const uploadDir = path.join(process.cwd(), "uploads");
+    await fs.mkdir(uploadDir, { recursive: true });
+
+    // ✅ Build full file path (directory + original filename)
+    const filePath = path.join(uploadDir, file.name);
+
+    // Save file
+    await fs.writeFile(filePath, buffer);
 
         const ext = path.extname(file.name).toLowerCase();
         let loader;
 
         if(ext === ".txt"){
             // txt loader
-            const loader = new TextLoader(tempFilePath)
+            loader = new TextLoader(filePath)
         } else if(ext === ".pdf"){
             // PDF loader
-            const loader = new PDFLoader(tempFilePath)
+            loader = new PDFLoader(filePath)
         } else if(ext === ".docx"){
             // docx loader
-            const loader = new DocxLoader(tempFilePath)
+            loader = new DocxLoader(filePath)
         } else if(ext === ".doc"){
             // doc loader
-            const loader = new DocxLoader(tempFilePath,
+            loader = new DocxLoader(filePath,
                 {
                     type : "doc",
                 }
             )
         } else if(ext === ".csv"){
             // docx loader
-            const loader = new CSVLoader(tempFilePath)
+            loader = new CSVLoader(filePath)
         } else {
-            await fs.unlink(tempFilePath);
+            await fs.unlink(filePath);
             return NextResponse.json({ error: "Unsupported file type" }, { status: 400 });
         }
 
@@ -59,10 +68,12 @@ export async function POST(request){
         // load file 
         const docs = await loader.load()
 
+
         // Ready the client OpenAI Embedding Model
         const embeddings = new OpenAIEmbeddings({
             model : 'text-embedding-3-large'
         })
+        // console.log(embeddings)
 
 
         // setup vector store 
@@ -71,18 +82,18 @@ export async function POST(request){
             collectionName: 'ragify-chat-collection',
         });
 
+        console.log("completed")
 
 
 
-
-        await fs.unlink(tempFilePath);
+        // await fs.unlink(uploadDir);
         return NextResponse.json({
             content: docs.map((d) => d.pageContent),
         });
     }
     catch(error){
         return NextResponse.json(
-            { error: "Failed to process file" },
+            { error: error },
             { status: 500 }
         )
     }

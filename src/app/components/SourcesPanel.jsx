@@ -8,6 +8,7 @@ import { Textarea } from "@/app/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/app/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { Upload, Plus, FileText, Link, Globe, X, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import axios from "axios";
 
 
 export function SourcesPanel({ isCollapsed = false, onToggleCollapse }) {
@@ -35,7 +36,7 @@ export function SourcesPanel({ isCollapsed = false, onToggleCollapse }) {
     setSources(sources.filter(s => s.id !== id));
   };
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files?.[0];
     if (file) {
       // Check file size (20MB limit)
@@ -44,12 +45,30 @@ export function SourcesPanel({ isCollapsed = false, onToggleCollapse }) {
         alert('File size exceeds 20MB limit. Please choose a smaller file.');
         return;
       }
-      
-      addSource({
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const res = await axios.post("/api/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        console.log(res.data.message);
+        addSource({
         type: 'file',
         title: file.name,
         content: `File: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`,
-      });
+        });
+
+      } catch (err) {
+        console.error(err);
+        // setMessage("Upload failed");
+      }
+      
+      
     }
   };
 
